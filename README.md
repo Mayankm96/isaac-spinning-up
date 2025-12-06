@@ -175,6 +175,12 @@ at the location [`scripts/rsl_rl/checkpoints`](scripts/rsl_rl/checkpoints)
 python scripts/rsl_rl/play.py --task=Motion-Tracking-G1-v0 --num_envs=50 --use_pretrained_checkpoint
 ```
 
+To record a video, you can run the `play.py` script with additional commands:
+
+```bash
+python scripts/rsl_rl/play.py --task=Motion-Tracking-G1-v0 --num_envs=16 --video --video_length 500 --headless --enable_cameras
+```
+
 ## 🧪 Exercise Overview
 
 In this tutorial, you will progressively build a robust humanoid motion-tracking pipeline
