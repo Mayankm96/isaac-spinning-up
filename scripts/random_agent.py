@@ -35,7 +35,7 @@ import torch
 import isaaclab_tasks  # noqa: F401
 from isaaclab_tasks.utils import parse_env_cfg
 
-import humanoid_motion_tracking.tasks  # noqa: F401
+import motion_tracking.tasks  # noqa: F401
 
 
 def main():
