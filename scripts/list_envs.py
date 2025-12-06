@@ -27,11 +27,11 @@ simulation_app = app_launcher.app
 import gymnasium as gym
 from prettytable import PrettyTable
 
-import humanoid_motion_tracking.tasks  # noqa: F401
+import motion_tracking.tasks  # noqa: F401
 
 
 def main():
-    """Print all environments registered in `humanoid_motion_tracking` extension."""
+    """Print all environments registered in `motion_tracking` extension."""
     # print all the available environments
     table = PrettyTable(["S. No.", "Task Name", "Entry Point", "Config"])
     table.title = "Available Environments in Isaac Lab"
@@ -44,7 +44,7 @@ def main():
     index = 0
     # acquire all Isaac environments names
     for task_spec in gym.registry.values():
-        if "Template-" in task_spec.id:
+        if "Motion-Tracking" in task_spec.id:
             # add details to table
             table.add_row([index + 1, task_spec.id, task_spec.entry_point, task_spec.kwargs["env_cfg_entry_point"]])
             # increment count

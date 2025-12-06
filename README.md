@@ -77,20 +77,26 @@ README.md
 
 The reference motion should be retargeted and use generalized coordinates only.
 
-<details open>
+For the time being, we use the pre-processed files pre-included in this tutorial.
+
+<details close>
 <summary>Instructions</summary>
 
-* Gather the reference motion datasets (please follow the original licenses),
-  we use the same convention as .csv of Unitree's dataset
+Gather the reference motion datasets (please follow the original licenses),
+we use the same convention as .csv of Unitree's dataset
 
-  * Unitree-retargeted LAFAN1 Dataset is available
-    on [HuggingFace](https://huggingface.co/datasets/lvhaidong/LAFAN1_Retargeting_Dataset)
-  * Sidekicks are from [KungfuBot](https://kungfu-bot.github.io/)
-  * Christiano Ronaldo celebration is from [ASAP](https://github.com/LeCAR-Lab/ASAP).
-  * Balance motions are from [HuB](https://hub-robot.github.io/)
+* Unitree-retargeted LAFAN1 Dataset is available
+  on [HuggingFace](https://huggingface.co/datasets/lvhaidong/LAFAN1_Retargeting_Dataset)
+* Sidekicks are from [KungfuBot](https://kungfu-bot.github.io/)
+* Christiano Ronaldo celebration is from [ASAP](https://github.com/LeCAR-Lab/ASAP).
+* Balance motions are from [HuB](https://hub-robot.github.io/)
 
-* Convert retargeted motions to include the maximum coordinates information
-  (body pose, body velocity, and body acceleration) via forward kinematics:
+The conversion script adds smooth transitions from a safe standing pose at the
+start and end of the motion to ensure safe deployment. Since the motion is
+cyclic, we also repeat it to reach the desired duration.
+
+As an example, we use the spin kick data using the link referenced in the MimicKit
+[installation instructions](https://github.com/xbpeng/MimicKit?tab=readme-ov-file#installation).
 
 ```bash
 python scripts/motions/pkl_to_csv.py \
@@ -112,18 +118,33 @@ python scripts/motions/csv_to_npz.py \
     --headless
 ```
 
+There are additional trajectories available inside the [`source/motion_tracking/data/motions/pkl`](motion_tracking/data/motions/pkl) directory to try out!
+
 </details>
+
+### Dummy Agents
+
+Check/debug the simulation environment by the following command:
+
+```bash
+python scripts/zero_agent.py --task=Motion-Tracking-G1-v0 \
+    --num_envs 32
+```
 
 ### Policy Training
 
 Train policy by the following command:
 
 ```bash
-python scripts/rsl_rl/train.py --task=Motion-Tracking-G1-v0 \
-    --headless \
-    --logger wandb \
-    --log_project_name unitree_g1_motion \
-    --run_name sidekick
+python scripts/rsl_rl/train.py --task=Motion-Tracking-G1-v0 --headless
+```
+
+After running the above, the training logs are saved into [`logs`](logs) directory.
+To view the training curves, open the tensorboard logger:
+
+```bash
+cd /PATH/TO/REPO
+tensorboard --log_dir .
 ```
 
 ### Policy Evaluation
