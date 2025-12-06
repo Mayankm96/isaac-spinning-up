@@ -42,7 +42,7 @@ source/
       assets/
       dataset/
       tasks/
-        motion_tracking/ # <--- Core Exercise File
+        motion_tracking/ # <--- !!! Core Exercise File !!!
       __init__.py
 scripts/
   motions/  # utility scripts to convert motion data formats
@@ -187,7 +187,7 @@ inside an Isaac Lab extension. Each step corresponds to modifying or implementin
 functions inside your task folder:
 
 ```bash
-source/motion_tracking/tasks/motion_tracking
+source/motion_tracking/motion_tracking/tasks/motion_tracking
 ```
 
 Specifically, you will write the terms that define the Markov Decision Process for motion
@@ -205,13 +205,13 @@ By completing the motion tracking exercises, you will learn to:
 
 ### Step 1: Define tracking reward function
 
-File: [`source/motion_tracking/tasks/motion_tracking/mdp/rewards.py`](source/motion_tracking/tasks/motion_tracking/mdp/rewards.py)
+File: [`source/motion_tracking/motion_tracking/tasks/motion_tracking/mdp/rewards.py`](source/motion_tracking/motion_tracking/tasks/motion_tracking/mdp/rewards.py)
 
 Implement the reward terms responsible for tracking the reference motion.
 
 ### Step 2: Define termination function
 
-File: [`source/motion_tracking/tasks/motion_tracking/mdp/terminations.py`](source/motion_tracking/tasks/motion_tracking/mdp/terminations.py)
+File: [`source/motion_tracking/motion_tracking/tasks/motion_tracking/mdp/terminations.py`](source/motion_tracking/motion_tracking/tasks/motion_tracking/mdp/terminations.py)
 
 Implement the termination terms responsible for terminating when bad tracking happens.
 
@@ -223,7 +223,7 @@ Enable empirical normalization to the actor and critic and retrain the policy. N
 
 ### Step 4: Define domain randomization for friction
 
-File: [`source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py`](source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg)
+File: [`source/motion_tracking/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py`](source/motion_tracking/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py)
 
 In this step, you will implement surface friction randomization to make the humanoid policy robust to different contact conditions.
 This models uncertainty in real-world contact surfaces, such as slippery floors, grippy mats, or variations in shoe soles.
@@ -236,7 +236,7 @@ to check the current trained policy.
 
 ### Step 5: Define more domain randomization for robustness
 
-File: [`source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py`](source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg)
+File: [`source/motion_tracking/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py`](source/motion_tracking/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py)
 
 In Isaac Lab, domain randomization is not limited to friction or material properties.
 The EventsCfg system allows you to register event-driven perturbations that run at different moments:
@@ -250,7 +250,7 @@ Your task is to inspect them, understand what they do, and optionally enable or 
 
 ### Step 6: Switch motions to other references
 
-The folder [`source/motion_tracking/data/motions`](`source/motion_tracking/data/motions`) contains additional motions to try out.
+The folder [`source/motion_tracking/data/motions`](source/motion_tracking/data/motions) contains additional motions to try out.
 
 Your task in this step is to pre-process, load, and plug in new reference motions into your MDP.
 Re-train the policies for these new references and tune the parameters to improve the tracking.
