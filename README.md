@@ -139,8 +139,7 @@ There are additional trajectories available inside the [`source/motion_tracking/
 Check/debug the simulation environment by the following command:
 
 ```bash
-python scripts/zero_agent.py --task=Motion-Tracking-G1-v0 \
-    --num_envs 32
+python scripts/zero_agent.py --task=Motion-Tracking-G1-v0 --num_envs 32
 ```
 
 ### Policy Training
