@@ -38,27 +38,6 @@ class MotionCommandCfg(CommandTermCfg):
     bodies. The names of the bodies to track are specified by this list.
     """
 
-    pose_range: dict[str, tuple[float, float]] = {}
-    """Ranges for resetting the root pose of the robot.
-
-    The pose range is a dictionary with the keys "x", "y", "z", "roll", "pitch", and "yaw".
-    The values are the ranges for the corresponding pose components.
-    """
-
-    velocity_range: dict[str, tuple[float, float]] = {}
-    """Ranges for resetting the root velocity of the robot.
-
-    The velocity range is a dictionary with the keys "x", "y", "z", "roll", "pitch", and "yaw".
-    The values are the ranges for the corresponding velocity components.
-    """
-
-    joint_position_range: tuple[float, float] = (-0.52, 0.52)
-    """Ranges for resetting the joint positions of the robot.
-
-    The joint position range is a tuple of two floats. The first float is the minimum
-    value and the second float is the maximum value.
-    """
-
     ##
     # Adaptive sampling settings.
     ##
