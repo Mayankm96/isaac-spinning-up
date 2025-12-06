@@ -20,7 +20,9 @@ def bad_anchor_pos(env: ManagerBasedRLEnv, command_name: str, threshold: float) 
     command: MotionCommand = env.command_manager.get_term(command_name)
 
     # compute the error and check if it exceeds the threshold
-    return torch.norm(command.anchor_pos_w - command.robot_anchor_pos_w, dim=1) > threshold
+    # TODO: compute position error between robot and reference
+    # Hint: subtract and check if any of the errors exceed the threshold
+    return torch.zeros(env.num_envs, device=env.device, dtype=torch.bool)
 
 
 def bad_anchor_pos_z_only(env: ManagerBasedRLEnv, command_name: str, threshold: float) -> torch.Tensor:
@@ -88,4 +90,6 @@ def base_ang_vel_exceed(env: ManagerBasedRLEnv, threshold: float) -> torch.Tenso
     asset: Articulation = env.scene["robot"]
 
     # check if any of the errors exceed the threshold
-    return torch.any(asset.data.root_ang_vel_b.abs() > threshold, dim=-1)
+    # TODO: check if the base angular velocity exceeds the threshold
+    # Hint: use the root_ang_vel_b property of the robot articulation
+    return torch.zeros(env.num_envs, device=env.device, dtype=torch.bool)

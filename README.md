@@ -73,7 +73,17 @@ README.md
 
 ## Motion Tracking
 
-### Motion Preprocessing & Registry Setup
+Motion tracking is the core component of BeyondMimic-style humanoid control.
+It measures how closely the simulated agent follows a reference motion, and provides rewards that guide the agent during training.
+
+In this project, motion tracking consists of:
+
+* Global Root Tracking – position and orientation of the humanoid’s base or anchor.
+* Relative Body Tracking – positions and orientations of key limbs relative to the root.
+* Exponential Kernel Rewards – smooth rewards that penalize deviation without clipping.
+* Reference Motion Switching – allows multiple motion clips to be used during training for robustness.
+
+## Motion Preprocessing & Registry Setup
 
 The reference motion should be retargeted and use generalized coordinates only.
 
@@ -149,13 +159,94 @@ tensorboard --log_dir .
 
 ### Policy Evaluation
 
-Play the trained policy by the following command:
+Play the trained policy by the following command. This automatically loads
+the last checkpoint saved for the environment.
 
 ```bash
 python scripts/rsl_rl/play.py --task=Motion-Tracking-G1-v0 --num_envs=50
 ```
 
-## Code formatting
+You can compare this policy to the pre-trained policy included in the repository
+at the location [`scripts/rsl_rl/checkpoints`](scripts/rsl_rl/checkpoints)
+
+```bash
+python scripts/rsl_rl/play.py --task=Motion-Tracking-G1-v0 --num_envs=50 --use_pretrained_checkpoint
+```
+
+## 🧪 Exercise Overview
+
+In this tutorial, you will progressively build a robust humanoid motion-tracking pipeline
+inside an Isaac Lab extension. Each step corresponds to modifying or implementing specific
+functions inside your task folder:
+
+```bash
+source/motion_tracking/tasks/motion_tracking
+```
+
+Specifically, you will write the terms that define the Markov Decision Process for motion
+tracking task.
+
+Each section contains TODO blocks for you to fill in.
+
+By completing the motion tracking exercises, you will learn to:
+
+* Compute position and orientation errors for humanoid bodies
+* Implement exponential-kernel rewards for imitation learning
+* Pre-process motion data for RL training
+* Integrate multiple reference motions into an environment
+* Enhance sim-to-sim and sim-to-real robustness
+
+### Step 1: Define tracking reward function
+
+File: [`source/motion_tracking/tasks/motion_tracking/mdp/rewards.py`](source/motion_tracking/tasks/motion_tracking/mdp/rewards.py)
+
+Implement the reward terms responsible for tracking the reference motion.
+
+### Step 2: Define termination function
+
+File: [`source/motion_tracking/tasks/motion_tracking/mdp/terminations.py`](source/motion_tracking/tasks/motion_tracking/mdp/terminations.py)
+
+### Step 3: Define domain randomization for friction
+
+File: [`source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py`](source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg)
+
+In this step, you will implement surface friction randomization to make the humanoid policy robust to different contact conditions.
+This models uncertainty in real-world contact surfaces, such as slippery floors, grippy mats, or variations in shoe soles.
+
+Isaac Lab allows you to randomize contact parameters (like friction, restitution, damping, etc.) through the `physics_material` field inside your task’s `EventsCfg`.
+This configuration controls how materials are updated during environment resets, without manually editing rigid-body properties.
+
+Modify these setting to make policy robust to friction. You can try setting these to small values
+to check the current trained policy.
+
+### Step 4: Define more domain randomization for robustness
+
+File: [`source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg.py`](source/motion_tracking/tasks/motion_tracking/motion_tracking_env_cfg)
+
+In Isaac Lab, domain randomization is not limited to friction or material properties.
+The EventsCfg system allows you to register event-driven perturbations that run at different moments:
+
+* startup — runs once when the simulation is created
+* reset — runs at each episode reset
+* interval — runs periodically during rollout (good for random pushes)
+
+There are several example EventTerm definitions that have been commented out.
+Your task is to inspect them, understand what they do, and optionally enable or rewrite them as part of the robustness exercises.
+
+### Step 5: Switch motions to other references
+
+The folder [`source/motion_tracking/data/motions`](`source/motion_tracking/data/motions`) contains additional motions to try out.
+
+Your task in this step is to pre-process, load, and plug in new reference motions into your MDP.
+Re-train the policies for these new references and tune the parameters to improve the tracking.
+
+### 🎯 Optional Challenge Questions
+
+* How does the choice of std influence the "sharpness" of each reward?
+* Why do exponential-kernel rewards often stabilize training better than linear penalties?
+* Which terms do you expect to be most important early in training? Why?
+
+## 🧹 Code formatting
 
 We have a pre-commit template to automatically format your code.
 To install pre-commit:

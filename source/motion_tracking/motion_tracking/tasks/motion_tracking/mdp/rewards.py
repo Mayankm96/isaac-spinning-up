@@ -25,8 +25,10 @@ def motion_global_anchor_position_error_exp(env: ManagerBasedRLEnv, command_name
     command: MotionCommand = env.command_manager.get_term(command_name)
 
     # compute the error
-    error = torch.sum(torch.square(command.anchor_pos_w - command.robot_anchor_pos_w), dim=-1)
-    return torch.exp(-error / std**2)
+    # TODO: compute position error between robot and reference
+    # Hint: subtract and square, then sum over xyz
+
+    return 0.0
 
 
 def motion_global_anchor_orientation_error_exp(env: ManagerBasedRLEnv, command_name: str, std: float) -> torch.Tensor:
@@ -41,8 +43,10 @@ def motion_global_anchor_orientation_error_exp(env: ManagerBasedRLEnv, command_n
     command: MotionCommand = env.command_manager.get_term(command_name)
 
     # compute the error
-    error = quat_error_magnitude(command.anchor_quat_w, command.robot_anchor_quat_w) ** 2
-    return torch.exp(-error / std**2)
+    # TODO: compute orientation error between robot and reference
+    # Hint: use quat_error_magnitude
+
+    return 0.0
 
 
 def motion_relative_body_position_error_exp(
@@ -59,10 +63,9 @@ def motion_relative_body_position_error_exp(
     body_indices = get_body_indices(command, body_names)
 
     # compute the error
-    error = torch.sum(
-        torch.square(command.body_pos_relative_w[:, body_indices] - command.robot_body_pos_w[:, body_indices]), dim=-1
-    )
-    return torch.exp(-error.mean(-1) / std**2)
+    # TODO: compute position error between robot and reference
+    # Hint: subtract and square, then sum over xyz 
+    return 0.0
 
 
 def motion_relative_body_orientation_error_exp(
@@ -80,11 +83,9 @@ def motion_relative_body_orientation_error_exp(
     body_indices = get_body_indices(command, body_names)
 
     # compute the error
-    error = (
-        quat_error_magnitude(command.body_quat_relative_w[:, body_indices], command.robot_body_quat_w[:, body_indices])
-        ** 2
-    )
-    return torch.exp(-error.mean(-1) / std**2)
+    # TODO: compute orientation error between robot and reference
+    # Hint: use quat_error_magnitude
+    return 0.0
 
 
 def motion_global_body_linear_velocity_error_exp(
