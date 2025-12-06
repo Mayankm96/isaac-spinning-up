@@ -64,7 +64,8 @@ def randomize_rigid_body_com(
     com_range: dict[str, tuple[float, float]],
     asset_cfg: SceneEntityCfg,
 ):
-    """Randomize the center of mass (CoM) of rigid bodies by adding a random value sampled from the given ranges.
+    """Randomize the center of mass (CoM) of rigid bodies by adding a random value sampled from
+    the given ranges. The CoM is randomized in the range of the given ranges for the x, y, and z axes.
 
     .. note::
         This function uses CPU tensors to assign the CoM. It is recommended to use this function

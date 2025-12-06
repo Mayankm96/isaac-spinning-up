@@ -38,7 +38,7 @@ class MotionLoader:
         self._motion_file = motion_file
         self._body_indices = body_indices
         # load the motion file
-        data = np.load(self.motion_file)
+        data = np.load(self._motion_file)
         self.fps = data["fps"]
         self._joint_pos = torch.tensor(data["joint_pos"], dtype=torch.float32, device=device)
         self._joint_vel = torch.tensor(data["joint_vel"], dtype=torch.float32, device=device)
