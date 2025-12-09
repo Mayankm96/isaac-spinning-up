@@ -1,3 +1,11 @@
+# This file includes code derived from HybridRobotics/whole_body_tracking
+# (MIT License).
+#
+# Original source:
+# https://github.com/HybridRobotics/whole_body_tracking
+#
+# See docs/licenses/LICENSE-whole_body_tracking.txt for the full license text.
+
 import isaaclab.sim as sim_utils
 from isaaclab.actuators import ImplicitActuatorCfg
 from isaaclab.assets.articulation import ArticulationCfg

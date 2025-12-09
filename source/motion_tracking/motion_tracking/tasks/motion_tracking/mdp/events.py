@@ -1,3 +1,15 @@
+# This file includes code derived from HybridRobotics/whole_body_tracking
+# (MIT License).
+#
+# Original source:
+# https://github.com/HybridRobotics/whole_body_tracking
+#
+# Modifications:
+#   - Added docstrings.
+#   - Added type hints.
+#
+# See docs/licenses/LICENSE-whole_body_tracking.txt for the full license text.
+
 from __future__ import annotations
 
 import torch
@@ -9,9 +21,7 @@ from isaaclab.envs.mdp.events import _randomize_prop_by_op
 from isaaclab.managers import SceneEntityCfg
 
 if TYPE_CHECKING:
-    from isaaclab.envs import ManagerBasedEnv, ManagerBasedRLEnv
-
-    from .commands import MotionCommand
+    from isaaclab.envs import ManagerBasedEnv
 
 
 def randomize_default_joint_pos(

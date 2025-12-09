@@ -284,3 +284,17 @@ Then you can run pre-commit with:
 ```bash
 pre-commit run --all-files
 ```
+
+## Acknowledgements
+
+This project is provided primarily for educational and research purposes.
+
+We gratefully acknowledge the following open-source projects, which inspired and/or contributed code to this repository:
+
+* [`HybridRobotics/whole_body_tracking`](https://github.com/HybridRobotics/whole_body_tracking)
+* [`mujocolab/g1_spinkick_example`](https://github.com/mujocolab/g1_spinkick_example)
+
+All third-party code is used in accordance with its original license.  
+Copies of the relevant licenses can be found in the [`docs/licenses`](docs/licenses/) directory.
+
+Some files have been modified from their original versions.

@@ -1,3 +1,11 @@
+# This file includes code derived from mujocolab/g1_spinkick_example
+# (Apache License 2.0).
+#
+# Original source:
+# https://github.com/mujocolab/g1_spinkick_example/blob/main/pkl_to_csv.py
+#
+# See docs/licenses/LICENSE-g1_spinkick_example.txt for the full license text.
+
 """Convert MimicKit pickle motion files to CSV format."""
 
 import numpy as np

@@ -1,3 +1,12 @@
+# This file includes code derived from HybridRobotics/whole_body_tracking
+# (MIT License).
+#
+# Original source:
+# https://github.com/HybridRobotics/whole_body_tracking/blob/main/scripts/csv_to_npz.py
+#
+# See docs/licenses/LICENSE-whole_body_tracking.txt for the full license text.
+
+
 """This script replay a motion from a csv file and output it to a npz file
 
 .. code-block:: bash

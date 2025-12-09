@@ -1,9 +1,18 @@
-"""This script demonstrates how to use the interactive scene interface to setup a scene with multiple prims.
+# This file includes code derived from HybridRobotics/whole_body_tracking
+# (MIT License).
+#
+# Original source:
+# https://github.com/HybridRobotics/whole_body_tracking/blob/main/scripts/replay_motion.py
+#
+# See docs/licenses/LICENSE-whole_body_tracking.txt for the full license text.
+
+
+"""This script replays a motion from a npz file.
 
 .. code-block:: bash
 
     # Usage
-    python replay_motion.py --motion_file source/whole_body_tracking/whole_body_tracking/assets/g1/motions/lafan_walk_short.npz
+    python replay_motion.py --motion_file source/motion_tracking/data/motions/npz/g1_spinkick.npz
 """
 
 """Launch Isaac Sim Simulator first."""
